@@ -1,0 +1,253 @@
+{
+  "info": {
+    "name": "AutoAndes API",
+    "description": "Colección de práctica para autenticación, servicios, clientes, vehículos, órdenes y reportes. Usa baseUrl para configurar el host del backend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api/v1"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "servicioId",
+      "value": "1"
+    },
+    {
+      "key": "vehiculoId",
+      "value": "1"
+    },
+    {
+      "key": "ordenId",
+      "value": "1"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Autenticación",
+      "item": [
+        {
+          "name": "Login admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Auto2026*\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/auth/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) { pm.collectionVariables.set('token', pm.response.json().token); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mi usuario",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Servicios y clientes",
+      "item": [
+        {
+          "name": "Listar servicios",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/servicios"
+          }
+        },
+        {
+          "name": "Crear servicio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"SRV-009\",\n  \"nombre\": \"Inspección preventiva\",\n  \"precio\": 35,\n  \"duracionMin\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/servicios"
+          }
+        },
+        {
+          "name": "Editar servicio",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"SRV-009\",\n  \"nombre\": \"Inspección preventiva actualizada\",\n  \"precio\": 38,\n  \"duracionMin\": 35\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/servicios/{{servicioId}}"
+          }
+        },
+        {
+          "name": "Cambiar estado de servicio",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activo\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/servicios/{{servicioId}}/estado"
+          }
+        },
+        {
+          "name": "Listar clientes",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/clientes"
+          }
+        },
+        {
+          "name": "Listar vehículos",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vehiculos"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Órdenes",
+      "item": [
+        {
+          "name": "Listar órdenes",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ordenes"
+          }
+        },
+        {
+          "name": "Crear orden",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehiculoId\": 1,\n  \"kilometraje\": 46000,\n  \"detalles\": [\n    {\n      \"servicioId\": 1,\n      \"cantidad\": 1\n    },\n    {\n      \"servicioId\": 2,\n      \"cantidad\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/ordenes"
+          }
+        },
+        {
+          "name": "Ver orden",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ordenes/{{ordenId}}"
+          }
+        },
+        {
+          "name": "Anular orden",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"motivo\": \"El cliente solicitó cancelar el servicio.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/ordenes/{{ordenId}}/anular"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reportes",
+      "item": [
+        {
+          "name": "Ingresos por servicio",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reportes/ingresos-por-servicio?desde=2026-01-01&hasta=2026-12-31"
+          }
+        }
+      ]
+    }
+  ]
+}

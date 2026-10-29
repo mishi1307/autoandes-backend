@@ -1,0 +1,7 @@
+package pe.edu.upeu.autoandes.config;
+import lombok.RequiredArgsConstructor; import pe.edu.upeu.autoandes.entity.*; import pe.edu.upeu.autoandes.repository.*; import org.springframework.beans.factory.annotation.Value; import org.springframework.boot.CommandLineRunner; import org.springframework.context.annotation.*; import org.springframework.security.crypto.password.PasswordEncoder; import org.springframework.stereotype.Component; import org.springframework.transaction.annotation.Transactional; import java.util.*;
+@Component @Profile("dev") @RequiredArgsConstructor
+public class UsuarioInicializador implements CommandLineRunner { private final UsuarioRepository users; private final RolRepository roles; private final PasswordEncoder encoder; @Value("${AUTOANDES_SEED_PASSWORD:Auto2026*}") private String clave;
+ @Override @Transactional public void run(String... args){crear("admin","Administrador AutoAndes","ADMIN",true);crear("asesor","Asesor de servicio","ASESOR",true);crear("jefe","Jefe de taller","JEFE_TALLER",true);crear("inactivo","Usuario desactivado","ASESOR",false);}
+ private void crear(String username,String nombre,String role,boolean activo){if(users.findByUsernameIgnoreCase(username).isPresent())return;Rol r=roles.findByNombre(role).orElseThrow(()->new IllegalStateException("Falta sembrar rol "+role));Usuario u=new Usuario();u.setUsername(username);u.setPassword(encoder.encode(clave));u.setNombreCompleto(nombre);u.setActivo(activo);u.setRoles(new HashSet<>(Set.of(r)));users.save(u);}
+}

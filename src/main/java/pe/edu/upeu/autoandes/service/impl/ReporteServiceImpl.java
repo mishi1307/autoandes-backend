@@ -1,4 +1,34 @@
 package pe.edu.upeu.autoandes.service.impl;
-import lombok.RequiredArgsConstructor; import pe.edu.upeu.autoandes.dto.ReporteIngresoDTO; import pe.edu.upeu.autoandes.exception.SolicitudInvalidaException; import pe.edu.upeu.autoandes.repository.*; import pe.edu.upeu.autoandes.service.service.ReporteService; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; import java.time.*; import java.util.List;
-@Service @RequiredArgsConstructor @Transactional(readOnly=true)
-public class ReporteServiceImpl implements ReporteService { private final OrdenServicioRepository repo; public List<ReporteIngresoDTO> ingresosPorServicio(LocalDate desde,LocalDate hasta){if(desde==null||hasta==null)throw new SolicitudInvalidaException("Los parámetros desde y hasta son obligatorios");if(desde.isAfter(hasta))throw new SolicitudInvalidaException("La fecha desde no puede ser posterior a hasta");return repo.reporte(desde.atStartOfDay(),hasta.plusDays(1).atStartOfDay()).stream().map(p->new ReporteIngresoDTO(p.getCodigo(),p.getServicio(),p.getCantidad(),p.getIngreso())).toList();} }
+
+import java.time.*;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pe.edu.upeu.autoandes.dto.ReporteIngresoDTO;
+import pe.edu.upeu.autoandes.exception.SolicitudInvalidaException;
+import pe.edu.upeu.autoandes.repository.*;
+import pe.edu.upeu.autoandes.service.service.ReporteService;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class ReporteServiceImpl implements ReporteService {
+    private final OrdenServicioRepository repo;
+
+    public List<ReporteIngresoDTO> ingresosPorServicio(LocalDate desde, LocalDate hasta) {
+        if (desde == null || hasta == null)
+            throw new SolicitudInvalidaException("Los parámetros desde y hasta son obligatorios");
+        if (desde.isAfter(hasta))
+            throw new SolicitudInvalidaException("La fecha desde no puede ser posterior a hasta");
+        return repo.reporte(desde.atStartOfDay(), hasta.plusDays(1).atStartOfDay()).stream()
+                .map(
+                        p ->
+                                new ReporteIngresoDTO(
+                                        p.getCodigo(),
+                                        p.getServicio(),
+                                        p.getCantidad(),
+                                        p.getIngreso()))
+                .toList();
+    }
+}

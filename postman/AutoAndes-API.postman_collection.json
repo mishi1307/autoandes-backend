@@ -6,10 +6,6 @@
   },
   "variable": [
     {
-      "key": "baseUrl",
-      "value": "http://localhost:8080/api/v1"
-    },
-    {
       "key": "token",
       "value": ""
     },
@@ -59,7 +55,7 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/auth/login"
+            "url": "http://localhost:8080/api/v1/auth/login"
           },
           "event": [
             {
@@ -77,7 +73,7 @@
           "name": "Mi usuario",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/auth/me"
+            "url": "http://localhost:8080/api/v1/auth/me"
           }
         }
       ]
@@ -89,7 +85,7 @@
           "name": "Listar servicios",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/servicios"
+            "url": "http://localhost:8080/api/v1/servicios"
           }
         },
         {
@@ -111,7 +107,7 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/servicios"
+            "url": "http://localhost:8080/api/v1/servicios"
           }
         },
         {
@@ -133,7 +129,7 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/servicios/{{servicioId}}"
+            "url": "http://localhost:8080/api/v1/servicios/{{servicioId}}"
           }
         },
         {
@@ -155,21 +151,21 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/servicios/{{servicioId}}/estado"
+            "url": "http://localhost:8080/api/v1/servicios/{{servicioId}}/estado"
           }
         },
         {
           "name": "Listar clientes",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/clientes"
+            "url": "http://localhost:8080/api/v1/clientes"
           }
         },
         {
           "name": "Listar vehículos",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/vehiculos"
+            "url": "http://localhost:8080/api/v1/vehiculos"
           }
         }
       ]
@@ -181,7 +177,7 @@
           "name": "Listar órdenes",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/ordenes"
+            "url": "http://localhost:8080/api/v1/ordenes"
           }
         },
         {
@@ -203,14 +199,14 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/ordenes"
+            "url": "http://localhost:8080/api/v1/ordenes"
           }
         },
         {
           "name": "Ver orden",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/ordenes/{{ordenId}}"
+            "url": "http://localhost:8080/api/v1/ordenes/{{ordenId}}"
           }
         },
         {
@@ -232,7 +228,7 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/ordenes/{{ordenId}}/anular"
+            "url": "http://localhost:8080/api/v1/ordenes/{{ordenId}}/anular"
           }
         }
       ]
@@ -244,7 +240,7 @@
           "name": "Ingresos por servicio",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/reportes/ingresos-por-servicio?desde=2026-01-01&hasta=2026-12-31"
+            "url": "http://localhost:8080/api/v1/reportes/ingresos-por-servicio?desde=2026-01-01&hasta=2026-12-31"
           }
         }
       ]

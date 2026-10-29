@@ -1,6 +1,7 @@
 package pe.edu.upeu.autoandes.controller;
 
 import java.util.List;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import pe.edu.upeu.autoandes.dto.ClienteResponseDTO;
 import pe.edu.upeu.autoandes.service.service.ClienteService;
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/v1/clientes")
 @RequiredArgsConstructor
 public class ClienteController {

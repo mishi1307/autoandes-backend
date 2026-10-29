@@ -2,6 +2,7 @@ package pe.edu.upeu.autoandes.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +11,7 @@ import pe.edu.upeu.autoandes.dto.ReporteIngresoDTO;
 import pe.edu.upeu.autoandes.service.service.ReporteService;
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/v1/reportes")
 @RequiredArgsConstructor
 public class ReporteController {

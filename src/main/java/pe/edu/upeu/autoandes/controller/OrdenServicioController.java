@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.*;
@@ -15,6 +16,7 @@ import pe.edu.upeu.autoandes.entity.EstadoOrden;
 import pe.edu.upeu.autoandes.service.service.OrdenServicioService;
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/v1/ordenes")
 @RequiredArgsConstructor
 public class OrdenServicioController {

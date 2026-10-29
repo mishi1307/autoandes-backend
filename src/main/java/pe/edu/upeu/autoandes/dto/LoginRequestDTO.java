@@ -1,3 +1,16 @@
 package pe.edu.upeu.autoandes.dto;
+
 import jakarta.validation.constraints.NotBlank;
-public record LoginRequestDTO(@NotBlank String username,@NotBlank String password) { }
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class LoginRequestDTO {
+    @NotBlank private String username;
+    @NotBlank private String password;
+}

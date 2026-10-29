@@ -1,3 +1,37 @@
 package pe.edu.upeu.autoandes.dto;
-import jakarta.validation.constraints.*; import java.math.BigDecimal;
-public record ServicioRequestDTO(@NotBlank @Pattern(regexp="SRV-[0-9]{3}") String codigo, @NotBlank @Size(min=3,max=80) String nombre, @NotNull @DecimalMin(value="0.0", inclusive=false) BigDecimal precio, @NotNull @Min(15) @Max(480) Integer duracionMin) { }
+
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ServicioRequestDTO {
+    @NotBlank
+    @Pattern(regexp = "SRV-[0-9]{3}")
+    private String codigo;
+
+    @NotBlank
+    @Size(min = 3, max = 80)
+    private String nombre;
+
+    @NotNull
+    @DecimalMin(value = "0.0", inclusive = false)
+    private BigDecimal precio;
+
+    @NotNull
+    @Min(15)
+    @Max(480)
+    private Integer duracionMin;
+}

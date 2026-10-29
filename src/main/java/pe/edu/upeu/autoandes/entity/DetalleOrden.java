@@ -1,32 +1,33 @@
 package pe.edu.upeu.autoandes.entity;
+
 import jakarta.persistence.*;
-import lombok.*;
 import java.math.BigDecimal;
+import lombok.*;
 
 @Entity
-@Table(name="detalle_orden")
+@Table(name = "detalle_orden")
 @Getter
 @Setter
 @NoArgsConstructor
-
 public class DetalleOrden {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch=FetchType.LAZY, optional=false)
-    @JoinColumn(name="orden_id", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "orden_id", nullable = false)
     private OrdenServicio orden;
 
-    @ManyToOne(fetch=FetchType.LAZY, optional=false)
-    @JoinColumn(name="servicio_id", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "servicio_id", nullable = false)
     private Servicio servicio;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Integer cantidad;
 
-    @Column(name="precio_unitario", nullable=false, precision=10, scale=2)
+    @Column(name = "precio_unitario", nullable = false, precision = 10, scale = 2)
     private BigDecimal precioUnitario;
 
-    @Column(nullable=false, precision=10, scale=2)
-    private BigDecimal subtotal; }
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal subtotal;
+}

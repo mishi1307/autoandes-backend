@@ -3,6 +3,7 @@ package pe.edu.upeu.autoandes.controller;
 import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,6 +12,7 @@ import pe.edu.upeu.autoandes.dto.*;
 import pe.edu.upeu.autoandes.service.service.VehiculoService;
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/v1/vehiculos")
 @RequiredArgsConstructor
 public class VehiculoController {
